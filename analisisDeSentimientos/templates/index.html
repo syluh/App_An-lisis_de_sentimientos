@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Analisis de sentimientos </title>
+	<link rel="shortcut icon" href="https://cdn.icon-icons.com/icons2/534/PNG/512/data-analysis_icon-icons.com_52842.png">
+	<!-- CSS -->	
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<style> h1 { 
+				padding: 1.5pc;
+				color: rgb(219, 8, 8); } </style>
+	<style> h2 { 
+				margin: 10pt;
+				padding: 0.2pc;
+				color: rgb(28, 36, 148); 
+				} </style>
+	<style> h3 { 
+		margin: 10pt;
+		padding: 0.5pc;
+		color: rgb(0, 0, 0); 
+		} </style>
+	<style>h4{margin: 10pt;}</style>
+	<style> b { color: rgb(11, 56, 3); } </style>
+	<style>body { 
+		background: #FFEFBA;  /* fallback for old browsers */
+    	background: -webkit-linear-gradient(to right, #FFFFFF, #FFEFBA);  /* Chrome 10-25, Safari 5.1-6 */
+    	background: linear-gradient(to right, #FFFFFF, #FFEFBA); 
+	}</style>
+</head>
+<body>
+	<h1><center>Análisis de sentimientos</h1></center>
+	<h2>¿Qué es un análasis de sentimientos?</h2>
+				<h4>El análisis de sentimiento o sentiment analysis consiste en evaluar las emociones, actitudes y opiniones.
+					Las organizaciones utilizan este método para obtener información que les permita comprender la forma en la que los clientes reaccionan respecto a un producto o servicio específico. 
+					La herramienta de análisis de sentimiento utiliza tecnologías avanzadas de inteligencia artificial, como procesamiento del lenguaje natural, 
+					análisis de texto y ciencia de datos para identificar, extraer y estudiar información subjetiva. En términos más simples, clasifica un texto como positivo, negativo o neutral.
+				</h4>
+		<h4>
+			<div class="login">
+			
+				<h2><center>La predicción se realizará con los siguientes algoritmos:</center></h2>
+				<h2> </h2>
+				<h3>
+					<div class="container text-cen	ter">
+						<div class="row">
+						  <div class="col">
+							[1] Algoritmo Clasificador Bayes Naive 
+						  </div>
+						  <div class="col">
+							[2] Algoritmo kNN
+						  </div>
+						  <div class="col">
+							[3] Algoritmo SVM
+						  </div>
+						</div>
+					  </div>
+				</h3>
+				<div class="predecir">
+					Introduzca el texto para predecir su sentimiento:
+					<form action="{{url_for('predict')}}" method="post">
+						<label>
+							<input type="text" name="text" placeholder="Ingrese su texto aquí" required="required" >
+						</label>
+						<button type = "submit" id="button" class="btn btn-success">¡Predecir Sentimiento!</button>
+					</form>
+				</div>
+		
+				<div class="resultado">
+					<div class="resultado_nb">
+						{% if prediction_nb == "Negative" %}
+							<b>Predicción del algoritmo NB:</b><br>
+							<img src="https://images.emojiterra.com/google/android-11/512px/1f625.png" width="100" height="100">
+							<p class="negativo">Negativo</p>
+						{% elif prediction_nb == "Positive" %}
+							<b>Predicción del algoritmo NB:</b><br>
+							<img src="https://www.diainternacionalde.com/imagenes/dias-raros/julio/07-17_dia-mundial-del-emoji.jpg" width="150" height="150">
+							<p class="positivo">Positivo</p>
+						{% elif prediction_nb == "Neutral" %}
+							<b>Predicción del algoritmo NB:</b><br>
+							<img src="https://images.emojiterra.com/google/noto-emoji/v2.034/128px/1f610.png" width="100" height="100">
+							<p class="neutro">Neutro</p>
+						{% elif prediction_nb == "None" %}
+							<b>Predicción del algoritmo NB:</b><br>
+							<img src="https://images.emojiterra.com/google/android-11/512px/1f914.png" width="100" height="100">
+							<p class="none">Lo sentimos no se pudo identificar el sentimiento</p>
+						{% endif %}
+					</div>
+		
+					<div class="resultado_knn">
+						{% if prediction_knn == "Negative" %}
+							<b>Predicción del algoritmo KNN:</b><br>
+							<img src="https://images.emojiterra.com/google/android-11/512px/1f625.png" width="100" height="100">
+							<p class="negativo">Negativo</p>
+						{% elif prediction_knn == "Positive" %}
+							<b>Predicción del algoritmo KNN:</b><br>
+							<img src="https://www.diainternacionalde.com/imagenes/dias-raros/julio/07-17_dia-mundial-del-emoji.jpg" width="150" height="150">
+						<p class="positivo">Positivo</p>
+						{% elif prediction_knn == "Neutral" %}
+							<b>Predicción del algoritmo KNN:</b><br>
+							<img src="https://images.emojiterra.com/google/noto-emoji/v2.034/128px/1f610.png" width="100" height="100">
+							<p class="neutro">Neutro</p>
+						{% elif prediction_knn == "None" %}
+							<b>Predicción del algoritmo KNN:</b><br>
+							<img src="https://images.emojiterra.com/google/android-11/512px/1f914.png" width="100" height="100">
+							<p class="none">Lo sentimos no se pudo identificar el sentimiento</p>
+						{% endif %}
+					</div>
+		
+					<div class="resultado_svm">
+						{% if prediction_svm == "Negative" %}
+							<b>Predicción del algoritmo SVM:</b><br>
+							<img src="https://images.emojiterra.com/google/android-11/512px/1f625.png" width="100" height="100">
+							<p class="negativo">Negativo</p>
+						{% elif prediction_svm == "Positive" %}
+							<b>Predicción del algoritmo SVM:</b><br>
+							<img src="https://www.diainternacionalde.com/imagenes/dias-raros/julio/07-17_dia-mundial-del-emoji.jpg" width="150" height="150">
+							<p class="positivo">Positivo</p>
+						{% elif prediction_svm == "Neutral" %}
+							<b>Predicción del algoritmo SVM:</b><br>
+							<img src="https://images.emojiterra.com/google/noto-emoji/v2.034/128px/1f610.png" width="100" height="100">
+							<p class="neutro">Neutro</p>
+						{% elif prediction_svm == "None" %}
+							<b>Predicción del algoritmo SVM:</b><br>
+							<img src="https://images.emojiterra.com/google/android-11/512px/1f914.png" width="100" height="100">
+							<p class="none">Lo sentimos no se pudo identificar el sentimiento</p>
+						{% endif %}
+					</div>
+				</div>
+</body>
+</html>
